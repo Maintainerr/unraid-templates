@@ -2,6 +2,8 @@
 
 Official [Unraid Community Applications](https://unraid.net/community/apps) templates, maintained by the [Maintainerr](https://github.com/Maintainerr/Maintainerr) team.
 
+This repository only hosts the Unraid templates. For everything about Maintainerr itself - features, full documentation, and other install methods - see the [main repository README](https://github.com/Maintainerr/Maintainerr#readme).
+
 ## Apps
 
 | App         | Template                                               | Image                                    |

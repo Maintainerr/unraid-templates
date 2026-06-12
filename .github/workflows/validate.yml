@@ -1,0 +1,99 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "14 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  xml:
+    name: XML structure
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Well-formedness and required fields
+        run: |
+          python3 - <<'EOF'
+          import sys
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          REQUIRED = ['Name', 'Repository', 'Registry', 'Support', 'Project',
+                      'Overview', 'Category', 'WebUI', 'TemplateURL', 'Icon']
+          failed = False
+
+          profile = ET.parse('ca_profile.xml').getroot()
+          if not (profile.findtext('Profile') or '').strip():
+              print('ca_profile.xml: <Profile> is empty')
+              failed = True
+
+          for path in sorted(Path('templates').glob('*.xml')):
+              root = ET.parse(path).getroot()
+              if root.tag != 'Container' or root.get('version') != '2':
+                  print(f'{path}: root must be <Container version="2">')
+                  failed = True
+              for tag in REQUIRED:
+                  if not (root.findtext(tag) or '').strip():
+                      print(f'{path}: missing or empty <{tag}>')
+                      failed = True
+              for cfg in root.findall('Config'):
+                  for attr in ('Name', 'Target', 'Type'):
+                      if not cfg.get(attr):
+                          print(f'{path}: <Config> missing {attr} attribute')
+                          failed = True
+              print(f'{path}: OK' if not failed else f'{path}: FAILED')
+          sys.exit(1 if failed else 0)
+          EOF
+
+  date-bump:
+    name: Date bumped on template change
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Require <Date> change when a template changes
+        run: |
+          base="origin/${{ github.base_ref }}"
+          changed=$(git diff --name-only "$base"...HEAD -- templates/ || true)
+          [ -z "$changed" ] && { echo 'No template changes.'; exit 0; }
+          today=$(date -u +%F)
+          if git diff "$base"...HEAD -- templates/ | grep -q '^+.*<Date>'; then
+            echo '<Date> was updated.'
+          elif grep -q "<Date>$today</Date>" $changed; then
+            echo "<Date> already set to today ($today)."
+          else
+            echo 'Templates changed but <Date> not bumped. Set <Date> to today (YYYY-MM-DD).'
+            exit 1
+          fi
+
+  links:
+    name: Links and image
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: All referenced URLs resolve
+        run: |
+          urls=$(grep -hoE 'https://[^<>" )]+' ca_profile.xml templates/*.xml README.md | sort -u)
+          fail=0
+          for u in $urls; do
+            code=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 30 \
+              -A 'Mozilla/5.0 (compatible; maintainerr-template-ci)' "$u" || echo 000)
+            if [ "$code" -ge 400 ] || [ "$code" = 000 ]; then
+              echo "BROKEN ($code): $u"; fail=1
+            else
+              echo "ok ($code): $u"
+            fi
+          done
+          exit $fail
+      - name: Image tags exist on GHCR
+        run: |
+          docker manifest inspect ghcr.io/maintainerr/maintainerr:latest > /dev/null
+          docker manifest inspect ghcr.io/maintainerr/maintainerr:development > /dev/null
+          echo 'latest and development tags resolve.'
