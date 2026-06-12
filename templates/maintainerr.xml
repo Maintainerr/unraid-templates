@@ -7,6 +7,12 @@
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Icon>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/logo.png</Icon>
+  <Screenshot>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/screenshots/rules.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/screenshots/collections.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/screenshots/rule-config.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/screenshots/overlays.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/screenshots/calendar.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/screenshots/storage-metrics.png</Screenshot>
   <WebUI>http://[IP]:[PORT:6246]</WebUI>
   <Overview>Maintainerr is the janitor your media server doesn't have.
 
@@ -16,7 +22,7 @@ Maintainerr does the deciding for you. Write rules for the stuff that's just tak
   <Support>https://github.com/Maintainerr/Maintainerr/issues</Support>
   <Project>https://github.com/Maintainerr/Maintainerr</Project>
   <TemplateURL>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/templates/maintainerr.xml</TemplateURL>
-  <ReadMe>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/README.md</ReadMe>
+  <ReadMe>https://raw.githubusercontent.com/Maintainerr/Maintainerr/main/README.md</ReadMe>
   <Discord>https://discord.maintainerr.info</Discord>
   <Category>MediaApp:Video MediaApp:Other</Category>
   <ExtraSearchTerms>plex jellyfin emby radarr sonarr seerr tautulli library cleanup media manager</ExtraSearchTerms>
