@@ -6,7 +6,7 @@
   <Network>bridge</Network>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Icon>https://raw.githubusercontent.com/Maintainerr/Maintainerr/main/apps/ui/public/logo.png</Icon>
+  <Icon>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/logo.png</Icon>
   <WebUI>http://[IP]:[PORT:6246]</WebUI>
   <Overview>Maintainerr is the janitor your media server doesn't have.
 
