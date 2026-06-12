@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>maintainerr</Name>
+  <Repository>ghcr.io/maintainerr/maintainerr:latest</Repository>
+  <Registry>https://github.com/Maintainerr/Maintainerr/pkgs/container/maintainerr</Registry>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Icon>https://raw.githubusercontent.com/Maintainerr/Maintainerr/main/apps/ui/public/logo.png</Icon>
+  <WebUI>http://[IP]:[PORT:6246]</WebUI>
+  <Overview>Maintainerr makes managing your media library easy. Create custom rules with parameters across Plex, Jellyfin, Emby, Radarr, Sonarr, Seerr and Tautulli, surface matching media in a collection for a configurable number of days, and automatically handle the cleanup.</Overview>
+  <Support>https://github.com/Maintainerr/Maintainerr/issues</Support>
+  <Project>https://github.com/Maintainerr/Maintainerr</Project>
+  <TemplateURL>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/templates/maintainerr.xml</TemplateURL>
+  <ReadMe>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/README.md</ReadMe>
+  <Discord>https://discord.maintainerr.info</Discord>
+  <Category>MediaApp:Other Tools:Utilities</Category>
+  <ExtraSearchTerms>plex jellyfin emby radarr sonarr seerr tautulli library cleanup media manager</ExtraSearchTerms>
+  <Requires>The container runs as user 99:100 (nobody:users). If the first start logs permission errors, run: chown -R 99:100 /mnt/user/appdata/maintainerr</Requires>
+  <ExtraParams>--user 99:100</ExtraParams>
+  <Date>2026-06-12</Date>
+  <MinVer>6.10</MinVer>
+  <License>MIT</License>
+  <DonateText>Support Maintainerr development on Open Collective</DonateText>
+  <DonateLink>https://opencollective.com/maintainerr</DonateLink>
+  <DefaultTagDescription>Stable releases</DefaultTagDescription>
+  <Branch>
+    <Tag>development</Tag>
+    <TagDescription>Pre-release builds from the development branch</TagDescription>
+  </Branch>
+  <Config Name="WebUI" Target="6246" Default="6246" Mode="tcp" Description="HTTP port for the web interface." Type="Port" Display="always" Required="true" Mask="false"/>
+  <Config Name="Data" Target="/opt/data" Default="/mnt/user/appdata/maintainerr" Mode="rw" Description="Persistent storage for the Maintainerr database and logs." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Timezone" Target="TZ" Default="UTC" Description="Timezone used for rule schedules and logs, e.g. Europe/Brussels." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Base Path" Target="BASE_PATH" Default="" Description="Set only when serving Maintainerr from a subdirectory behind a reverse proxy, e.g. /maintainerr." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="UI Hostname" Target="UI_HOSTNAME" Default="" Description="Address the web server listens on inside the container. Leave empty for 0.0.0.0; set :: for IPv6." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="GitHub Token" Target="GITHUB_TOKEN" Default="" Description="Optional GitHub Personal Access Token for higher API rate limits when checking for updates (60/hr without, 5000/hr with)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+</Container>

@@ -1,0 +1,14 @@
+<CommunityApplications>
+  <Profile>
+    Official Unraid templates from the Maintainerr team. Maintainerr is a library
+    maintenance tool for Plex, Jellyfin and Emby: build custom rules across your
+    media stack (Radarr, Sonarr, Seerr, Tautulli and more), surface matching media
+    in a collection for a configurable number of days, and automatically handle the
+    cleanup. For help, open an issue on GitHub or join our Discord.
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/Maintainerr/Maintainerr/main/apps/ui/public/logo.png</Icon>
+  <WebPage>https://github.com/Maintainerr/Maintainerr</WebPage>
+  <Discord>https://discord.maintainerr.info</Discord>
+  <DonateLink>https://opencollective.com/maintainerr</DonateLink>
+  <DonateText>Support Maintainerr development on Open Collective</DonateText>
+</CommunityApplications>
