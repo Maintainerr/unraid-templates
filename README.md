@@ -16,10 +16,10 @@ Install **Maintainerr** from the **Apps** tab in the Unraid web UI. The defaults
 - **Data**: `/mnt/user/appdata/maintainerr` (holds the database and logs)
 - **Timezone**: set this to your local timezone so rule schedules run when you expect
 
-The container runs as user `99:100` (`nobody:users`). If the first start logs permission errors, fix the appdata ownership:
+The container runs as user `1000:1000`. Before the first start, fix the appdata ownership in the Unraid terminal (adjust if you changed the appdata path):
 
 ```sh
-chown -R 99:100 /mnt/user/appdata/maintainerr
+chown -R 1000:1000 /mnt/user/appdata/maintainerr
 ```
 
 To try unreleased changes, switch the release branch from **Stable releases** to the **development** tag in the template.
