@@ -1,23 +1,27 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>maintainerr</Name>
+  <Name>Maintainerr</Name>
   <Repository>ghcr.io/maintainerr/maintainerr:latest</Repository>
   <Registry>https://github.com/Maintainerr/Maintainerr/pkgs/container/maintainerr</Registry>
   <Network>bridge</Network>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Icon>https://raw.githubusercontent.com/Maintainerr/Maintainerr/main/apps/ui/public/logo.png</Icon>
+  <Icon>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/logo.png</Icon>
   <WebUI>http://[IP]:[PORT:6246]</WebUI>
-  <Overview>Maintainerr makes managing your media library easy. Create custom rules with parameters across Plex, Jellyfin, Emby, Radarr, Sonarr, Seerr and Tautulli, surface matching media in a collection for a configurable number of days, and automatically handle the cleanup.</Overview>
+  <Overview>Maintainerr is the janitor your media server doesn't have.
+
+Libraries fill up. Users request a movie, watch it once, and never touch it again. Half-finished shows sit around for years. And somehow you're the one who has to decide what to delete.
+
+Maintainerr does the deciding for you. Write rules for the stuff that's just taking up space - unwatched, unrequested, gathering dust - and it gathers those titles into a collection, gives everyone a grace period to catch up, then clears them from your media server, the *arrs and Seerr. Set it up once and forget it. Everything is automated!</Overview>
   <Support>https://github.com/Maintainerr/Maintainerr/issues</Support>
   <Project>https://github.com/Maintainerr/Maintainerr</Project>
   <TemplateURL>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/templates/maintainerr.xml</TemplateURL>
   <ReadMe>https://raw.githubusercontent.com/Maintainerr/unraid-templates/main/README.md</ReadMe>
   <Discord>https://discord.maintainerr.info</Discord>
-  <Category>MediaApp:Other Tools:Utilities</Category>
+  <Category>MediaApp:Video MediaApp:Other</Category>
   <ExtraSearchTerms>plex jellyfin emby radarr sonarr seerr tautulli library cleanup media manager</ExtraSearchTerms>
-  <Requires>The container runs as user 99:100 (nobody:users). If the first start logs permission errors, run: chown -R 99:100 /mnt/user/appdata/maintainerr</Requires>
-  <ExtraParams>--user 99:100</ExtraParams>
+  <Requires>The container runs as user 1000:1000. Before the first start, run the following in the Unraid terminal (adjust if you changed the appdata path): chown -R 1000:1000 /mnt/user/appdata/maintainerr</Requires>
+  <ExtraParams>--user 1000:1000</ExtraParams>
   <Date>2026-06-12</Date>
   <MinVer>6.10</MinVer>
   <License>MIT</License>
